@@ -17,11 +17,11 @@ def get_resolution(the_video):
     return list_quality
 
 def main():
-    print("Your video will be saved to: {}".format(file_path()))
+    print("Video akan di save di : {}".format(file_path()))
     #Input 
-    yt_url = input("Copy and paste your YouTube URL here: ")
+    yt_url = input("Copy dan paste Youtube URL Mu: ")
     print(yt_url)
-    print ("Accessing YouTube URL...")
+    print ("Mengakses URL Video di YouTube ...")
 
     # Searches for the video and sets up the callback to run the progress indicator. 
     try:
@@ -35,29 +35,29 @@ def main():
     for idx, ps in enumerate(list_quality):
         print((idx + 1),".", ps)
     
-    # get the input of quality
+    # Ambil List Kualitas Video nya. 
     try:
-        print("Select Quality of Video")
-        quality = int(input("Input the number : ")) - 1
+        print("Pilih Kualitas Video")
+        quality = int(input("Input nomornya aja : ")) - 1
     except:
         quality = 0
 
-    # Get the video download
+    # Ambil Video Untuk Didownload
     video_type = video.streams.filter(progressive = True, res=list_quality[quality]).first()
     print(video_type, list_quality[quality])
 
-    # Gets the title of the video
+    # Ambil Judul Video
     title = video.title
 
-    # Prepares the file for download
+    # Menyiapkan Video untuk didownload
     print ("Fetching: {}...".format(title))
     global file_size
     file_size = video_type.filesize
     
-    # Starts the download process
+    # Mulai Download Process
     video_type.download(file_path())
  
-    print ("Ready to download another video.\n\n")
+    print ("Siap Untuk Mendownload Video Berikutnya!.\n\n")
     again = main()
 
 file_size = 0
