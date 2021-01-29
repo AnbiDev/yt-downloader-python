@@ -1,6 +1,9 @@
 from pytube import YouTube, Playlist
 import os
 
+VIDEO = 1
+PLAYLIST = 2
+
 def progress_function(stream, chunk, remaining):
     percent = (100 * (file_size - remaining))/file_size
     print("{:00.0f}% downloaded".format(percent))
@@ -44,7 +47,6 @@ def videoDownload():
 
     # Ambil Video Untuk Didownload
     video_type = video.streams.filter(progressive = True, res=list_quality[quality]).first()
-    print(video_type, list_quality[quality])
 
     # Ambil Judul Video
     title = video.title
@@ -60,7 +62,7 @@ def videoDownload():
     print ("Siap Untuk Mendownload Video Berikutnya!.\n\n")
     again = main()
 
-def playlistDownload()
+def playlistDownload():
     
     #Input 
     yt_url = input("Copy dan paste Playlist URL Mu: ")
@@ -77,12 +79,7 @@ def playlistDownload()
     for video in playlist:
         # Ambil Judul Video
         title = video.title
-
-        # Menyiapkan Video untuk didownload
-        print ("Fetching: {}...".format(title))
-        global file_size
-        file_size = video.filesize
-    
+        
         # Mulai Download Process
         video.download(file_path())
     
@@ -102,13 +99,16 @@ def main():
         main()
     
     print("Video akan di save di : {}".format(file_path()))
-    if select === 1:
-        videoDownload()    
-    else:
-        playlistDownload()
     
+    if select == VIDEO:
+        videoDownload()    
+    elif select == PLAYLIST:
+        playlistDownload()
+    else:
+        print("Kamu Salah pilih!")
+        main()
+
 
 file_size = 0
-
 if __name__ == "__main__":
     main()
