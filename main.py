@@ -23,7 +23,7 @@ def videoDownload():
     print(yt_url)
     print ("Mengakses URL Video di YouTube ...")
 
-    # Searches for the video and sets up the callback to run the progress indicator. 
+    # Cari video dan akses callback didalamnya
     try:
         video = YouTube(yt_url, on_progress_callback=progress_function)
     except:
@@ -67,7 +67,7 @@ def playlistDownload()
     print(yt_url)
     print ("Mengakses URL PlayLIst di YouTube ...")
 
-    # Searches for the video and sets up the callback to run the progress indicator. 
+    # Cari video dan akses callback didalamnya
     try:
         playlist = Playlist(yt_url)
     except:
