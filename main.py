@@ -16,8 +16,8 @@ def get_resolution(the_video):
     list_quality = [stream.resolution for stream in the_video]
     return list_quality
 
-def main():
-    print("Video akan di save di : {}".format(file_path()))
+def videoDownload():
+
     #Input 
     yt_url = input("Copy dan paste Youtube URL Mu: ")
     print(yt_url)
@@ -28,7 +28,7 @@ def main():
         video = YouTube(yt_url, on_progress_callback=progress_function)
     except:
         print("ERROR. Check your:\n  -connection\n  -url is a YouTube url\n\nTry again.")
-        redo = start()
+        redo = main()
     
     # Get the quality
     list_quality = get_resolution(video)
@@ -59,6 +59,54 @@ def main():
  
     print ("Siap Untuk Mendownload Video Berikutnya!.\n\n")
     again = main()
+
+def playlistDownload()
+    
+    #Input 
+    yt_url = input("Copy dan paste Playlist URL Mu: ")
+    print(yt_url)
+    print ("Mengakses URL PlayLIst di YouTube ...")
+
+    # Searches for the video and sets up the callback to run the progress indicator. 
+    try:
+        playlist = Playlist(yt_url)
+    except:
+        print("ERROR. Check your:\n  -connection\n  -url is a YouTube url\n\nTry again.")
+        redo = main()
+    
+    for video in playlist:
+        # Ambil Judul Video
+        title = video.title
+
+        # Menyiapkan Video untuk didownload
+        print ("Fetching: {}...".format(title))
+        global file_size
+        file_size = video.filesize
+    
+        # Mulai Download Process
+        video.download(file_path())
+    
+    print ("Siap Untuk Mendownload Video Berikutnya!.\n\n")
+    again = main()
+
+def main():
+    
+    print("Mau download video atau playlist?")
+    print("1. Video")
+    print("2. Playlist")
+    
+    try:
+        select = int(input("Masukkan Nomor : "))
+    except:
+        print("Kamu salah pilih!")
+        main()
+    
+    print("Video akan di save di : {}".format(file_path()))
+    if select === 1:
+        videoDownload()    
+    else:
+        playlistDownload()
+    
 
 file_size = 0
 
